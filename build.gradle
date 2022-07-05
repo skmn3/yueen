@@ -4,9 +4,9 @@ plugins {
 	id 'java'
 }
 
-group = 'kr.co'
+group = 'kr.co.sunget'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 configurations {
 	compileOnly {
@@ -19,16 +19,64 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
+	// jpa
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// db connectors
 	runtimeOnly 'mysql:mysql-connector-java'
-	annotationProcessor 'org.projectlombok:lombok'
+
+	// web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	// validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// querydsl
+	implementation 'com.querydsl:querydsl-jpa'
+	annotationProcessor(
+			"javax.persistence:javax.persistence-api",
+			"javax.annotation:javax.annotation-api",
+			"com.querydsl:querydsl-apt:5.0.0:jpa")
+
+	//aws cloud
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+	// mapstruct
+	implementation 'org.mapstruct:mapstruct:1.5.1.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final'
+
+	// jwt
+	implementation 'com.nimbusds:nimbus-jose-jwt:9.23'
+
+	// security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// configuration
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+	// redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation('it.ozimov:embedded-redis:0.7.3') {
+		exclude group: "org.slf4j", module: "slf4j-simple"
+	}
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
 }
 
-tasks.named('test') {
+test {
 	useJUnitPlatform()
+}
+
+jar {
+	enabled = false
 }
