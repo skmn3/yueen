@@ -22,7 +22,7 @@ public class User extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(20)", nullable = false, unique = true)
     private String accountId;
 
-    @Column(columnDefinition = "VARCHAR(255)", nullable = false, unique = true)
+    @Column(columnDefinition = "VARCHAR(45)", nullable = false, unique = true)
     private String email;
 
     @Column(columnDefinition = "CHAR(60)", nullable = false)
